@@ -16,6 +16,9 @@ class ArticlesController < ApplicationController
   def create
     @article = Article.new(article_params)
 
+    # El metodo current_user, lo provee device a todos los controladores y vistas
+    # para acceder a el usuario logueado
+    @article.owner = current_user
     respond_to do |format|
       if @article.save
         format.html { redirect_to @article, notice: "Article created." }
