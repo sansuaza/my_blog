@@ -23,7 +23,7 @@ gem 'jbuilder', '~> 2.7'
 # gem 'bcrypt', '~> 3.1.7'
 gem 'hamlit'
 gem 'simple_form'
-gem 'bundler', '~> 1.3'
+
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
@@ -62,7 +62,6 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 group :production do
-
   gem 'rails_12factor'
 
 end
