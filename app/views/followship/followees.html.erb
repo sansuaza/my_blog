@@ -1,0 +1,13 @@
+<h1>Users followees</h1>
+
+<ul>
+  <% @followee_users.each do |user| %>
+    <% unless user.id == current_user.id %>
+      <li>
+        <%= link_to user.name, user %>
+      </li>
+    <% end %>
+  <% end %>
+</ul>
+
+<%= link_to "New Article", new_followship_path %>
