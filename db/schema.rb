@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_04_170745) do
+ActiveRecord::Schema.define(version: 2021_03_05_222758) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,6 +35,15 @@ ActiveRecord::Schema.define(version: 2021_03_04_170745) do
     t.index ["article_id"], name: "index_comments_on_article_id"
   end
 
+  create_table "followships", force: :cascade do |t|
+    t.bigint "follower_id", null: false
+    t.bigint "followee_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["followee_id"], name: "index_followships_on_followee_id"
+    t.index ["follower_id"], name: "index_followships_on_follower_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -49,4 +58,6 @@ ActiveRecord::Schema.define(version: 2021_03_04_170745) do
 
   add_foreign_key "articles", "users", column: "owner_id"
   add_foreign_key "comments", "articles"
+  add_foreign_key "followships", "users", column: "followee_id"
+  add_foreign_key "followships", "users", column: "follower_id"
 end
