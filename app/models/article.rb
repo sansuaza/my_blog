@@ -10,4 +10,3 @@ class Article < ApplicationRecord
   # Handle of dont permit that the article dont get the same title
   validates :title, uniqueness: {case_insensitive: false}
 end
- 

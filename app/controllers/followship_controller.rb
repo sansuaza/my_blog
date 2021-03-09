@@ -36,7 +36,7 @@ class FollowshipController < ApplicationController
         current_user.id
       ).group(:id)
 
-      @unfollowee_users = [@all_users] - [@followee_users]
+      @unfollowee_users = @all_users
     end
 
     def find_user
