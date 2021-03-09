@@ -1,14 +1,14 @@
 class FollowshipController < ApplicationController
   load_and_authorize_resource
-  before_action :set_followship, :set_followee_users, only: %i[unfollow index]
-  before_action :set_unfollowed_user, only: %i[unfollowees]
+  before_action :set_user, only: %i[show]
+  #before_action :set_unfollowed_user, only: %i[followees]
 
-  def followees
-    @followee_users
+  def show
+
+    @user
   end
 
   def unfollowees
-    p "usuarios que no los sigue #{@unfollowee_users}"
     @unfollowee_users
   end
 
@@ -24,43 +24,21 @@ class FollowshipController < ApplicationController
     end
   end
 
-
   private
 
-    def set_unfollowed_user
-      @all_users= User.all
-
-      @followee_users = User.joins(:followships).where(
-        "id = ? OR followships.follower_id = ?",
-        current_user.id,
-        current_user.id
-      ).group(:id)
-
-      @unfollowee_users = @all_users
+    def set_user
+      @user= User.find(params[:id])
     end
-
-    def find_user
-      User.find(params[:id])
-    end
-
-    def find_followship(id_follower, id_followee)
-      Followship.find(followee: id_followee, follower: id_follower)
-    end
-
-    def set_followship
-      @followship = Followship.find(followee: params[:id], follower: current_user)
-    end
-
-    def set_followee_users
-      @followee_users = User.joins(:followships).where(
-        "id = ? OR followships.follower_id = ?",
-        current_user.id,
-        current_user.id
-      )
-    end
-
+#
+    #def find_followship(id_follower, id_followee)
+    #  Followship.find(followee: id_followee, follower: id_follower)
+    #end
+#
+    #def set_followship
+    #  @followship = Followship.find(followee: params[:id], follower: current_user)
+    #end
+#
     def followship_params
       params.require(:followship).permit(:followee)
     end
-
 end

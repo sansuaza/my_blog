@@ -9,7 +9,9 @@
                     method: :delete,
                     data: { confirm: "Are you sure?" } %></li>
   </ul>
-
+  <p>
+    <%= link_to "creator", "/users/show/#{@article.owner.id}"%>
+  <p>
   <h2>Comments</h2>
   <%= render @article.comments %>
 

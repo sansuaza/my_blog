@@ -1,0 +1,9 @@
+<p> Perfil del user <%=@user.email %> <p>
+<div class ="container p-5 my-3 border">
+  <h1 class="text-center"><%= @user.email %></h1>
+
+  <p class="text-center">Username</p>
+
+  <%= button_to 'Follow', { action: "follow" }, method: :post%>
+
+</div>
