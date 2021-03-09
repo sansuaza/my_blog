@@ -20,14 +20,10 @@ class ArticlesController < ApplicationController
     # El metodo current_user, lo provee device a todos los controladores y vistas
     # para acceder a el usuario logueado
     @article.owner = current_user
-    respond_to do |format|
-      if @article.save
-        format.html { redirect_to @article, notice: "Article created." }
-        format.json { render :show, status: :created, location: @article }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @article.errors, status: :unprocessable_entity }
-      end
+    if @article.save
+      redirect_to @article
+    else
+      render :new
     end
   end
 
@@ -36,27 +32,23 @@ class ArticlesController < ApplicationController
   end
 
   def update
-    respond_to do |format|
-      if @article.update(article_params)
-        format.html { redirect_to @article, notice: "Article updated." }
-        format.json { render :show, status: :ok, location: @article }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @article.errors, status: :unprocessable_entity }
-      end
+    @article = Article.find(params[:id])
+    if @article.update(article_params)
+      redirect_to @article
+    else
+      render :edit
     end
   end
 
   def destroy
+    @article = Article.find(params[:id])
     @article.destroy
-    respond_to do |format|
-      format.html { redirect_to articles_url, notice: "Article deleted." }
-      format.json { head :no_content }
-    end
+
+    redirect_to root_path
   end
 
   private
-  
+
     def set_article
       @article = Article.find(params[:id])
     end
