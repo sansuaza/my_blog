@@ -1,11 +1,16 @@
-<p> Perfil del user <%=@user.email %> <p>
+<p> Logged_user<%=@current_user.username %> <p>
 <div class ="container p-5 my-3 border">
-  <h1 class="text-center"><%= @user.email %></h1>
+  <h1 class="text-center"><%= @user.full_name %></h1>
 
-  <p class="text-center">Username</p>
-  <% if current_user.is_followee?(@user) %>
-    <%= button_to 'Follow', { action: "follow" }, method: :post%>
+  <p class="text-center"><%= @user.username %></p>
+  <% unless current_user_owner? %>
+    <% unless current_user.is_followee?(@user) %>
+      <%= button_to 'Follow', { action: "follow" }, method: :post%>
+    <% else %>
+      <%= button_to 'Unfollow', { action: "unfollow" }, method: :post%>
+    <% end %>
   <% else %>
-    <%= button_to 'Unfollow', { action: "unfollow" }, method: :post%>
-  <% end %>
+    <%= link_to 'Edit my profile', edit_user_registration_path(current_user), class: 'btn btn-primary' %>
+  <%end%>
+
 </div>

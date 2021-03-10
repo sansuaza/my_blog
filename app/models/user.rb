@@ -19,11 +19,13 @@ class User < ApplicationRecord
 
 
   def follow(user)
-    p "------------------------- user to follow #{user.email}"
-    followees.push user
+    p "------------------------- user to follow #{user}"
+    p "------------------------- followees #{followees}"
+    followees << user
   end
 
   def unfollow(followed_user)
+    p "------------------------- user to unfollow #{user.username}"
     followees.delete followed_user
   end
 
@@ -31,4 +33,7 @@ class User < ApplicationRecord
     !(followees.find { |user| user.id == other_user.id }).nil?
   end
 
+  def full_name
+    "#{first_name} #{last_name}"
+  end
 end
