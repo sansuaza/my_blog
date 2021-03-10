@@ -1,5 +1,6 @@
 class User < ApplicationRecord
 
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -12,20 +13,17 @@ class User < ApplicationRecord
   has_many :followee_followships, class_name: 'Followship', foreign_key: 'followee_id',
             dependent: :destroy
 
-  has_many :followers, through: :follower_followships
-  has_many :followees, through: :followee_followships
+  has_many :followers, through: :followee_followships
+  has_many :followees, through: :follower_followships
 
   validates :username, uniqueness: true
 
 
   def follow(user)
-    p "------------------------- user to follow #{user}"
-    p "------------------------- followees #{followees}"
     followees << user
   end
 
   def unfollow(followed_user)
-    p "------------------------- user to unfollow #{user.username}"
     followees.delete followed_user
   end
 

@@ -10,12 +10,14 @@ class UsersController < ApplicationController
   def follow
     if @user
       current_user.follow(@user)
+      render :show
     end
   end
 
   def unfollow
     if @user
       current_user.unfollow(@user)
+      render :show
     end
   end
 
