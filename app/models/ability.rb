@@ -10,6 +10,6 @@ class Ability
     can :manage, Article, owner: user
     can :read, Article
     can :manage, Followship
-    can :manage, User
+    can :read, User
   end
 end
