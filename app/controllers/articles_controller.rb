@@ -1,6 +1,6 @@
 class ArticlesController < ApplicationController
   load_and_authorize_resource
-  before_action :set_article, only: %i[ show edit update destroy ]
+  before_action :set_article, :set_owner, only: %i[ show edit update destroy ]
 
   def index
     @articles = Article.all
@@ -8,6 +8,7 @@ class ArticlesController < ApplicationController
 
   def show
     @articles = Article.find(params[:id])
+    p "article owner #{@owner}"
   end
 
   def new
@@ -53,8 +54,11 @@ class ArticlesController < ApplicationController
       @article = Article.find(params[:id])
     end
 
-
     def article_params
       params.require(:article).permit(:title, :body, :status)
+    end
+
+    def set_owner
+      @owner = @article.owner
     end
 end

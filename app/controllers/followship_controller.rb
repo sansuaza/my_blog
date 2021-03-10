@@ -4,7 +4,6 @@ class FollowshipController < ApplicationController
   #before_action :set_unfollowed_user, only: %i[followees]
 
   def show
-
     @user
   end
 

@@ -3,7 +3,9 @@
   <h1 class="text-center"><%= @user.email %></h1>
 
   <p class="text-center">Username</p>
-
-  <%= button_to 'Follow', { action: "follow" }, method: :post%>
-
+  <% if current_user.is_followee?(@user) %>
+    <%= button_to 'Follow', { action: "follow" }, method: :post%>
+  <% else %>
+    <%= button_to 'Unfollow', { action: "unfollow" }, method: :post%>
+  <% end %>
 </div>

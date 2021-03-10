@@ -8,12 +8,15 @@ class User < ApplicationRecord
 
   # Direct access to followship table
   has_many :follower_followships, class_name: 'Followship', foreign_key: 'follower_id',
-                                    dependent: :destroy
+            dependent: :destroy
   has_many :followee_followships, class_name: 'Followship', foreign_key: 'followee_id',
-  dependent: :destroy
+            dependent: :destroy
 
   has_many :followers, through: :follower_followships
   has_many :followees, through: :followee_followships
+
+  validates :username, uniqueness: true
+
 
   def follow(user)
     p "------------------------- user to follow #{user.email}"
