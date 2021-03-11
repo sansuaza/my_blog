@@ -10,7 +10,7 @@
                     data: { confirm: "Are you sure?" } %></li>
   </ul>
   <p>
-    <%= link_to "creator: #{@owner.username}", "/users/show/#{@owner.id}"%>
+    <%= link_to "creator: #{@owner.username}", "/users/show/#{@owner.username}"%>
   <p>
   <h2>Comments</h2>
   <%= render @article.comments %>
