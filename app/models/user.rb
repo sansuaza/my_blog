@@ -8,27 +8,27 @@ class User < ApplicationRecord
   has_many :articles
 
   # Direct access to followship table
-  has_many :follower_followships, class_name: 'Followship', foreign_key: 'follower_id',
+  has_many :follower_user_followships, class_name: 'Followship', foreign_key: 'follower_user_id',
             dependent: :destroy
-  has_many :followee_followships, class_name: 'Followship', foreign_key: 'followee_id',
+  has_many :following_users_followships, class_name: 'Followship', foreign_key: 'following_user_id',
             dependent: :destroy
 
-  has_many :followers, through: :followee_followships
-  has_many :followees, through: :follower_followships
+  has_many :follower_users, through: :following_user_followships
+  has_many :following_users, through: :follower_user_followships
 
   validates :username, uniqueness: true
 
 
   def follow(user)
-    followees << user
+    following_users << user
   end
 
-  def unfollow(followed_user)
-    followees.delete followed_user
+  def unfollow(user_to_unfollow)
+    following_users.delete user_to_unfollow
   end
 
   def is_followee?(other_user)
-    !(followees.find { |user| user.id == other_user.id }).nil?
+    !(following_users.find { |following_user| following_user.id == other_user.id }).nil?
   end
 
   def full_name
