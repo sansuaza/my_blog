@@ -1,6 +1,7 @@
 class ArticlesController < ApplicationController
   load_and_authorize_resource
   before_action :set_article, :set_owner, only: %i[ show edit update destroy ]
+  helper_method :can_comment?
 
   def index
     @articles = Article.all
@@ -60,5 +61,9 @@ class ArticlesController < ApplicationController
 
     def set_owner
       @owner = @article.owner
+    end
+
+    def can_comment?
+      current_user.is_followee?(@owner)||current_user==@owner
     end
 end

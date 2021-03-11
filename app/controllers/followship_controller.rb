@@ -1,7 +1,6 @@
 class FollowshipController < ApplicationController
   load_and_authorize_resource
   before_action :set_user, only: %i[show]
-  #before_action :set_unfollowed_user, only: %i[followees]
 
   def show
     @user

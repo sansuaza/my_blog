@@ -10,11 +10,15 @@
                     data: { confirm: "Are you sure?" } %></li>
   </ul>
   <p>
-    <%= link_to "creator", "/users/show/#{@article.owner.id}"%>
+    <%= link_to "creator: #{@owner.username}", "/users/show/#{@owner.id}"%>
   <p>
   <h2>Comments</h2>
   <%= render @article.comments %>
 
-  <h2>Add a comment:</h2>
-  <%= render 'comments/form' %>
+  <%if can_comment?%>
+    <h2>Add a comment:</h2>
+    <%= render 'comments/form' %>
+  <%else%>
+    <h3>To coment this article, you should to follow at <%= @owner.full_name %></h3>
+  <%end%>
 </div>
