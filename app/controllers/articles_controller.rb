@@ -9,7 +9,6 @@ class ArticlesController < ApplicationController
 
   def show
     @articles = Article.find(params[:id])
-    p "article owner #{@owner}"
   end
 
   def new
@@ -18,14 +17,13 @@ class ArticlesController < ApplicationController
 
   def create
     @article = Article.new(article_params)
-
-    # El metodo current_user, lo provee device a todos los controladores y vistas
-    # para acceder a el usuario logueado
     @article.owner = current_user
-    if @article.save
-      redirect_to @article
-    else
-      render :new
+    respond_to do |format|
+      if @article.save
+        format.html { redirect_to @article, notice: "Article created." }
+      else
+        format.html { render :new, status: :unprocessable_entity }
+      end
     end
   end
 
@@ -45,7 +43,6 @@ class ArticlesController < ApplicationController
   def destroy
     @article = Article.find(params[:id])
     @article.destroy
-
     redirect_to root_path
   end
 

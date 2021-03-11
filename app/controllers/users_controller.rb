@@ -8,17 +8,17 @@ class UsersController < ApplicationController
   end
 
   def follow
-
     if @user && !current_user.is_followee?(@user)
       current_user.follow(@user)
-      redirect_to :show
+      render :show
+    else
     end
   end
 
   def unfollow
-    if @user && !current_user.is_followee?(@user)
+    if @user && current_user.is_followee?(@user)
       current_user.unfollow(@user)
-      redirect_to :show
+      render :show
     end
   end
 
