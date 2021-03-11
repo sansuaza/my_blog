@@ -27,7 +27,7 @@ class User < ApplicationRecord
     following_users.delete user_to_unfollow
   end
 
-  def is_followee?(other_user)
+  def following_user?(other_user)
     !(following_users.find { |following_user| following_user.id == other_user.id }).nil?
   end
 

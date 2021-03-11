@@ -61,6 +61,6 @@ class ArticlesController < ApplicationController
     end
 
     def can_comment?
-      current_user.is_followee?(@owner)||current_user==@owner
+      current_user.following_user?(@owner)||current_user==@owner
     end
 end

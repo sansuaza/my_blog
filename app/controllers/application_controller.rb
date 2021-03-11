@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   # Only the autenticated users are able to navigate  in the app
   before_action :authenticate_user!, if: :user_signed_in?
   before_action :authenticate_user!, except: [:index], if: !:user_signed_in?
-
+  helper_method :followhing_user?
 
   rescue_from CanCan::AccessDenied do |exception|
     redirect_to root_path
@@ -15,12 +15,9 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:sign_up, keys: [:username, :first_name, :last_name])
   end
 
-  def custom_authenticacion_user
-    if :user_signed_in?
-      :authenticate_user!
-    else
-      :authenticate_user!
-    end
+  def followhing_user?(user)
+    current_user.following_user?(user)
   end
+
 
 end
