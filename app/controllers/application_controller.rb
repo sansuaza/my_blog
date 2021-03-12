@@ -19,5 +19,4 @@ class ApplicationController < ActionController::Base
     current_user.following_user?(user)
   end
 
-
 end

@@ -2,20 +2,21 @@
   <h1 class="text-center"><%= @article.title %></h1>
 
   <p class="text-center"><%= @article.body %></p>
-
-  <ul>
-    <li><%= link_to "Edit", edit_article_path(@article) %></li>
-    <li><%= link_to "Destroy", article_path(@article),
-                    method: :delete,
-                    data: { confirm: "Are you sure?" } %></li>
-  </ul>
+  <%if current_user_owner?(@article.owner)%>
+    <ul>
+      <li><%= link_to "Edit", edit_article_path(@article) %></li>
+      <li><%= link_to "Destroy", article_path(@article),
+                      method: :delete,
+                      data: { confirm: "Are you sure?" } %></li>
+    </ul>
+  <%end%>
   <p>
     <%= link_to "creator: #{@owner.username}", "/users/show/#{@owner.username}"%>
   <p>
   <h2>Comments</h2>
   <%= render @article.comments %>
 
-  <%if can_comment?%>
+  <%if can_comment?(@article.owner)%>
     <h2>Add a comment:</h2>
     <%= render 'comments/form' %>
   <%else%>

@@ -26,8 +26,4 @@ class UsersController < ApplicationController
   def set_user
     @user= User.find_by( username: params[:username])
   end
-
-  def current_user_owner?
-    current_user == @user
-  end
 end
