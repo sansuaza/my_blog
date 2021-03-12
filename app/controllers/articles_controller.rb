@@ -32,8 +32,8 @@ class ArticlesController < ApplicationController
   end
 
   def update
-    if current_user_owner?
-      @article = Article.find(params[:id])
+    @article = Article.find(params[:id])
+    if current_user_owner?(@article.owner)
       if @article.update(article_params)
         redirect_to @article
       else
@@ -43,8 +43,8 @@ class ArticlesController < ApplicationController
   end
 
   def destroy
-    if current_user_owner?
-      @article = Article.find(params[:id])
+    @article = Article.find(params[:id])
+    if current_user_owner?(@article.owner)
       @article.destroy
       redirect_to root_path
     end

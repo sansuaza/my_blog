@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  include ApplicationHelper
   before_action :configure_permitted_parameters, if: :devise_controller?
   # Only the autenticated users are able to navigate  in the app
   before_action :authenticate_user!, if: :user_signed_in?
