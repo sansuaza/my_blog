@@ -21,14 +21,14 @@
       <%= form.label :body, class:"form-label" %>
       <%= form.text_area :body, class:"form-control" %>
     </div>
-    
+
     <div class="mb-3">
       <%= form.label :status %><br>
       <%= form.select :status, ['public', 'private', 'archived'], selected: 'public', class:"form-control" %>
     </div>
 
     <div class="actions">
-      <%= form.submit "Register", class:"btn btn-primary btn-block"%>
+      <%= form.submit "Register", class:"btn btn-secondary btn-block"%>
     </div>
   <%end%>
 </div>

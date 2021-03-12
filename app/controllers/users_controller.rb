@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
   load_and_authorize_resource
   before_action :set_user, only: %i[show follow unfollow]
-  #helper_method :current_user_owner?
 
   def show
     @user
