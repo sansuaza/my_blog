@@ -11,13 +11,13 @@
     </ul>
   <%end%>
   <p>
-    <%= link_to "creator: #{@owner.username}", "/users/show/#{@owner.username}"%>
+    <%= link_to "creator: #{@owner.username}", user_path(@owner.username) %>
   <p>
-  <h2>Comments</h2>
+  <h3>Comments</h3>
   <%= render @article.comments %>
 
   <%if can_comment?(@article.owner)%>
-    <h2>Add a comment:</h2>
+    <h3>Add a comment:</h3>
     <%= render 'comments/form' %>
   <%else%>
     <h4>To coment this article, you should to follow at <%= @owner.full_name %></h4>

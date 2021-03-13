@@ -10,14 +10,8 @@ class ApplicationController < ActionController::Base
     redirect_to root_path
   end
 
-
   protected
-  def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:username, :first_name, :last_name])
-  end
-
-  def followhing_user?(user)
-    current_user.following_user?(user)
-  end
-
+    def configure_permitted_parameters
+      devise_parameter_sanitizer.permit(:sign_up, keys: [:username, :first_name, :last_name])
+    end
 end

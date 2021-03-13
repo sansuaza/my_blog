@@ -50,7 +50,6 @@ class ArticlesController < ApplicationController
   end
 
   private
-
     def set_article
       @article = Article.find(params[:id])
     end

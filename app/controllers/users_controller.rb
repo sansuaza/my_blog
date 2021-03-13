@@ -9,20 +9,19 @@ class UsersController < ApplicationController
   def follow
     if @user && !current_user.following_user?(@user)
       current_user.follow(@user)
-      redirect_to "/users/show/#{@user.username}"
+      redirect_to user_path(@user.username)
     end
   end
 
   def unfollow
     if @user && current_user.following_user?(@user)
       current_user.unfollow(@user)
-      redirect_to "/users/show/#{@user.username}"
+      redirect_to user_path(@user.username)
     end
   end
 
   private
-
-  def set_user
-    @user= User.find_by( username: params[:username])
-  end
+    def set_user
+      @user= User.find_by( username: params[:username])
+    end
 end

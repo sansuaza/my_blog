@@ -1,6 +1,4 @@
 class User < ApplicationRecord
-
-
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -17,7 +15,6 @@ class User < ApplicationRecord
   has_many :following_users, through: :follower_user_followships
 
   validates :username, uniqueness: true
-
 
   def follow(user)
     following_users << user
