@@ -4,10 +4,10 @@ module ApplicationHelper
   end
 
   def can_comment?(owner)
-    followhing_user?(owner)||current_user==owner
+    following_user?(owner)||current_user==owner
   end
 
-  def followhing_user?(user)
+  def following_user?(user)
     current_user.following_user?(user)
   end
 end
