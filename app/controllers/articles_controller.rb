@@ -1,6 +1,6 @@
 class ArticlesController < ApplicationController
   load_and_authorize_resource
-  before_action :set_article, only: %i[ show edit update destroy ]
+  before_action :set_article, :set_owner, only: %i[ show edit update destroy ]
 
   def index
     @articles = Article.all
@@ -16,14 +16,13 @@ class ArticlesController < ApplicationController
 
   def create
     @article = Article.new(article_params)
-
-    # El metodo current_user, lo provee device a todos los controladores y vistas
-    # para acceder a el usuario logueado
     @article.owner = current_user
-    if @article.save
-      redirect_to @article
-    else
-      render :new
+    respond_to do |format|
+      if @article.save
+        format.html { redirect_to @article, notice: "Article created." }
+      else
+        format.html { render :new, status: :unprocessable_entity }
+      end
     end
   end
 
@@ -33,28 +32,33 @@ class ArticlesController < ApplicationController
 
   def update
     @article = Article.find(params[:id])
-    if @article.update(article_params)
-      redirect_to @article
-    else
-      render :edit
+    if current_user_owner?(@article.owner)
+      if @article.update(article_params)
+        redirect_to @article
+      else
+        render :edit
+      end
     end
   end
 
   def destroy
     @article = Article.find(params[:id])
-    @article.destroy
-
-    redirect_to root_path
+    if current_user_owner?(@article.owner)
+      @article.destroy
+      redirect_to root_path
+    end
   end
 
   private
-
     def set_article
       @article = Article.find(params[:id])
     end
 
-
     def article_params
       params.require(:article).permit(:title, :body, :status)
+    end
+
+    def set_owner
+      @owner = @article.owner
     end
 end

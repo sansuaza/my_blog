@@ -1,16 +1,25 @@
-<h1><%= @article.title %></h1>
+<div class ="container p-5 my-3 border">
+  <h1 class="text-center"><%= @article.title %></h1>
 
-<p><%= @article.body %></p>
+  <p class="text-center"><%= @article.body %></p>
+  <%if current_user_owner?(@article.owner)%>
+    <ul>
+      <li><%= link_to "Edit", edit_article_path(@article) %></li>
+      <li><%= link_to "Destroy", article_path(@article),
+                      method: :delete,
+                      data: { confirm: "Are you sure?" } %></li>
+    </ul>
+  <%end%>
+  <p>
+    <%= link_to "creator: #{@owner.username}", user_path(@owner.username) %>
+  <p>
+  <h3>Comments</h3>
+  <%= render @article.comments %>
 
-<ul>
-  <li><%= link_to "Edit", edit_article_path(@article) %></li>
-  <li><%= link_to "Destroy", article_path(@article),
-                  method: :delete,
-                  data: { confirm: "Are you sure?" } %></li>
-</ul>
-
-<h2>Comments</h2>
-<%= render @article.comments %>
-
-<h2>Add a comment:</h2>
-<%= render 'comments/form' %>
+  <%if can_comment?(@article.owner)%>
+    <h3>Add a comment:</h3>
+    <%= render 'comments/form' %>
+  <%else%>
+    <h4>To coment this article, you should to follow at <%= @owner.full_name %></h4>
+  <%end%>
+</div>
