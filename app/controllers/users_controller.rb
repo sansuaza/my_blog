@@ -3,7 +3,6 @@ class UsersController < ApplicationController
   before_action :set_user, only: %i[show follow unfollow]
 
   def show
-    @user
   end
 
   def follow
@@ -22,6 +21,6 @@ class UsersController < ApplicationController
 
   private
     def set_user
-      @user= User.find_by( username: params[:username])
+      @user= User.find_by(username: params[:username])
     end
 end

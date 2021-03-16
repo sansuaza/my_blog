@@ -4,7 +4,7 @@ module ApplicationHelper
   end
 
   def can_comment?(owner)
-    following_user?(owner)||current_user==owner
+    following_user?(owner) || current_user == owner
   end
 
   def following_user?(user)
