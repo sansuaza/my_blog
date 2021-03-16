@@ -25,7 +25,8 @@ gem 'hamlit'
 gem 'simple_form'
 gem 'devise'
 gem 'cancancan'
-
+gem 'bootstrap', '~> 4.5.0'
+gem 'jquery-rails'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
@@ -65,5 +66,4 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 group :production do
   gem 'rails_12factor'
-
 end
