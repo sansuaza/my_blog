@@ -14,7 +14,7 @@ class User < ApplicationRecord
   has_many :follower_users, through: :following_user_followships
   has_many :following_users, through: :follower_user_followships
 
-  validates :username, uniqueness: true
+  validates :username, uniqueness: true, length: { minimum: 5}
 
   def follow(user)
     following_users << user
