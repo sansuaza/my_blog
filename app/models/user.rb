@@ -3,12 +3,12 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-  has_many :articles
+  has_many :articles, foreign_key: 'owner_id'
 
   # Direct access to followship table
   has_many :follower_user_followships, class_name: 'Followship', foreign_key: 'follower_user_id',
             dependent: :destroy
-  has_many :following_users_followships, class_name: 'Followship', foreign_key: 'following_user_id',
+  has_many :following_user_followships, class_name: 'Followship', foreign_key: 'following_user_id',
             dependent: :destroy
 
   has_many :follower_users, through: :following_user_followships
