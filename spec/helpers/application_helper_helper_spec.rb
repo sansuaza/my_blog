@@ -35,5 +35,4 @@ RSpec.describe ApplicationHelper, type: :helper do
       expect(helper.can_comment?(user_to_check)).to be_truthy
     end
   end
-
 end

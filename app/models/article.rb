@@ -8,5 +8,5 @@ class Article < ApplicationRecord
   validates :body, presence: true, length: { minimum: 10 }
 
   # Handle of dont permit that the article dont get the same title
-  validates :title, uniqueness: {case_insensitive: false}
+  validates :title, uniqueness: { case_insensitive: false }
 end
