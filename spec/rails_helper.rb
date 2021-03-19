@@ -52,7 +52,7 @@ RSpec.configure do |config|
   # Helper used in login tests
   config.include Warden::Test::Helpers
   # Devise module to build controller tests
-  # config.include Devise::Test::ControllerHelpers, type= 'controller'
+  #config.include Devise::Test::ControllerHelpers, type= 'controller'
   config.include Devise::Test::IntegrationHelpers, type: :request
 
 
