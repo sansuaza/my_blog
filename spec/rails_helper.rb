@@ -52,9 +52,10 @@ RSpec.configure do |config|
   # Helper used in login tests
   config.include Warden::Test::Helpers
   # Devise module to build controller tests
-  #config.include Devise::Test::ControllerHelpers, type= 'controller'
+  #config.include Devise::Test::ControllerHelpers, type: :helper
+  config.include Devise::Test::ControllerHelpers, type: :controller
   config.include Devise::Test::IntegrationHelpers, type: :request
-
+  config.include Devise::Test::IntegrationHelpers, type: :helper
 
   config.before(:suite)do
     DatabaseCleaner.clean
